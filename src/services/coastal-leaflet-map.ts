@@ -12,6 +12,9 @@ export class CoastalLeafletMap extends LeafletMap {
     let group = L.layerGroup([]);
     coast.pois.forEach((poi) => {
       let marker = L.marker([poi.coordinates.geo.lat, poi.coordinates.geo.long]);
+      var newpopup = L.popup({ autoClose: false, closeOnClick: false });
+      newpopup.setContent( poi.name);
+      marker.bindPopup(newpopup);
       marker.addTo(group);
     });
     this.addLayer(coast.title, group);
