@@ -1,3 +1,7 @@
 <template>
-  <h1>${message}</h1>
+  <require from="./resources/elements/header"></require>
+  <header title.one-way="title"></header>
+  <div class="uk-container">
+    <router-view></router-view>
+  </div>
 </template>
