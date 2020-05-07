@@ -4,6 +4,7 @@ import LayersObject = L.Control.LayersObject;
 import { Geodetic } from "./poi";
 import LayerControl = L.Control.Layers;
 import Layer = L.Layer;
+import LayerGroup = L.LayerGroup;
 
 export interface LeafletMapDescriptor {
   id: string;
@@ -30,7 +31,7 @@ export class LeafletMap {
       {
         attribution:
           "Tiles &copy; Esri &mdash; Source: Esri, i-cubed, USDA, USGS, AEX, GeoEye, Getmapping, Aerogrid, IGN, IGP, UPR-EGP, and the GIS User Community",
-      }
+      },
     ),
   };
 
@@ -49,13 +50,44 @@ export class LeafletMap {
   }
 
   addControl() {
-    this.control = L.control
-      .layers(this.baseLayers, this.overlays)
-      .addTo(this.imap);
+    this.control = L.control.layers(this.baseLayers, this.overlays).addTo(this.imap);
   }
 
   addLayer(title: string, layer: Layer) {
     this.overlays[title] = layer;
     this.imap.addLayer(layer);
+  }
+
+  moveTo(zoom: number, location: Geodetic) {
+    this.imap.setZoom(zoom);
+    this.imap.panTo(new L.LatLng(location.lat, location.long));
+  }
+
+  zoomTo(location: Geodetic) {
+    this.imap.setView(new L.LatLng(location.lat, location.long), 8);
+  }
+
+  addPopup(layerTitle: string, content: string, location: Geodetic) {
+    let popupGroup: LayerGroup;
+    if (!this.overlays[layerTitle]) {
+      popupGroup = L.layerGroup([]);
+      this.overlays[layerTitle] = popupGroup;
+      this.imap.addLayer(popupGroup);
+    } else {
+      popupGroup = this.overlays[layerTitle] as LayerGroup;
+    }
+    const popup = L.popup({
+      closeOnClick: false,
+      closeButton: false,
+    })
+      .setLatLng({ lat: location.lat, lng: location.long })
+      .setContent(content);
+    popup.addTo(popupGroup);
+  }
+
+  invalidateSize() {
+    this.imap.invalidateSize();
+    let hiddenMethodMap = this.imap as any;
+    hiddenMethodMap._onResize();
   }
 }
