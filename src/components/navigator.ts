@@ -2,7 +2,7 @@ import { LeafletMap } from "../services/leaflet-map";
 import { Coast, PointOfInterest } from "../services/poi";
 import { autoinject } from "aurelia-framework";
 import { Oileain } from "../services/oileain";
-import { CoastalLeafletMap,  PoiSelect  } from "../services/coastal-leaflet-map";
+import { CoastalLeafletMap, PoiSelect } from "../services/coastal-leaflet-map";
 
 @autoinject
 export class Navigator implements PoiSelect {
