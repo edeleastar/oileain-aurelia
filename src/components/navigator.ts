@@ -2,10 +2,10 @@ import { LeafletMap } from "../services/leaflet-map";
 import { Coast, PointOfInterest } from "../services/poi";
 import { autoinject } from "aurelia-framework";
 import { Oileain } from "../services/oileain";
-import { CoastalLeafletMap } from "../services/coastal-leaflet-map";
+import { CoastalLeafletMap,  PoiSelect  } from "../services/coastal-leaflet-map";
 
 @autoinject
-export class Navigator {
+export class Navigator implements PoiSelect {
   mainMapDescriptor = {
     id: "home-map-id",
     height: 650,
@@ -28,6 +28,7 @@ export class Navigator {
   islandMap: LeafletMap;
   coasts: Array<Coast>;
   poi: PointOfInterest;
+  poiSelected = false;
 
   constructor(private oileain: Oileain) {}
 
@@ -38,6 +39,16 @@ export class Navigator {
   attached() {
     this.mainMap = new CoastalLeafletMap(this.mainMapDescriptor);
     this.islandMap = new LeafletMap(this.islandMapDescriptor);
-    this.mainMap.populateCoasts(this.coasts, false);
+    this.mainMap.populateCoasts(this.coasts, false, this);
+  }
+
+  async onSelect(id: string) {
+    this.poi = await this.oileain.getIslandById(id);
+    if (this.islandMap) {
+      this.islandMap.addPopup("Islands", this.poi.name, this.poi.coordinates.geo);
+      this.islandMap.moveTo(15, this.poi.coordinates.geo);
+      this.islandMap.invalidateSize();
+      this.poiSelected = true;
+    }
   }
 }
