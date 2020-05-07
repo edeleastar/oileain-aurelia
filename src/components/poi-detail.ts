@@ -1,6 +1,7 @@
 import { autoinject } from "aurelia-framework";
 import { LeafletMap } from "../services/leaflet-map";
 import { Oileain } from "../services/oileain";
+import { PointOfInterest } from "services/poi";
 
 @autoinject
 export class PoiDetail {
@@ -16,9 +17,19 @@ export class PoiDetail {
   };
   map: LeafletMap;
 
+  poi: PointOfInterest;
+
   constructor(private oileain: Oileain) {}
 
-  async activate(params: any) {
+  renderPoi(poi) {
+    this.poi = poi;
+    this.title = poi.name;
+  }
+
+  async activate(params) {
+    await this.oileain.getCoasts();
+    const poi = await this.oileain.getIslandById(params.id);
+    this.renderPoi(poi);
   }
 
   attached() {
