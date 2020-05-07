@@ -24,6 +24,11 @@ export class PoiDetail {
   renderPoi(poi) {
     this.poi = poi;
     this.title = poi.name;
+    if (this.map) {
+      this.map.addPopup("Islands", poi.nameHtml, poi.coordinates.geo);
+      this.map.moveTo(15, poi.coordinates.geo);
+      this.map.invalidateSize();
+    }
   }
 
   async activate(params) {
@@ -34,5 +39,8 @@ export class PoiDetail {
 
   attached() {
     this.map = new LeafletMap(this.mapDescriptor);
+    if (this.poi) {
+      this.renderPoi(this.poi);
+    }
   }
 }
