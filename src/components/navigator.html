@@ -3,7 +3,7 @@
   <require from="../resources/elements/poi-description.html"></require>
 
   <div class="uk-text-center" uk-grid>
-    <div class="uk-width-1-3@m">
+    <div class="uk-width-1-3@m uk-animation-scale-up">
       <div id="${mainMapDescriptor.id}" style="height:${mainMapDescriptor.height}px"></div>
       <div if.bind="poiSelected">
         <div class="uk-card uk-card-default uk-card-body">
@@ -11,7 +11,7 @@
         </div>
       </div>
     </div>
-    <div class="uk-width-expand@m">
+    <div class="uk-width-expand@m uk-animation-scale-up">
       <div id="${islandMapDescriptor.id}" style="height:${islandMapDescriptor.height}px"></div>
       <div if.bind="poiSelected">
         <div class="uk-card uk-card-default uk-card-body">
