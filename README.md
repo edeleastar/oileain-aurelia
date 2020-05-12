@@ -1,33 +1,59 @@
-# `oileain`
+# Oileain Open Maps
 
-This project is bootstrapped by [aurelia-cli](https://github.com/aurelia/cli).
+An experiment in rendering maps of the Island of Ireland. Based on the book [Oileain](http://www.oileain.org/) by David Walsh. 
+The application is running here:
 
-For more information, go to https://aurelia.io/docs/cli/webpack
+- <https://oileain.netlify.app>
 
-## Run dev app
+This application is implemented using the [Aurelia Framework](https://aurelia.io/). It relies the 
+the API hosted in this repository:
 
-Run `npm start`, then open `http://localhost:8080`
+- https://github.com/edeleastar/oileain-api
 
-You can change the standard webpack configurations from CLI easily with something like this: `npm start -- --open --port 8888`. However, it is better to change the respective npm scripts or `webpack.config.js` with these options, as per your need.
+This is an imutable json version of David's book. 
 
-To enable Webpack Bundle Analyzer, do `npm run analyze` (production build).
+# Building
 
-To enable hot module reload, do `npm start -- --hmr`.
+With git & node installed, clone this repo:
 
-To change dev server port, do `npm start -- --port 8888`.
+~~~
+git clone https://github.com/edeleastar/oileain-au.git
+~~~
 
-To change dev server host, do `npm start -- --host 127.0.0.1`
+From withint the project install dependencies:
 
-**PS:** You could mix all the flags as well, `npm start -- --host 127.0.0.1 --port 7070 --open --hmr`
+~~~
+npm install
+~~~
 
-For long time aurelia-cli user, you can still use `au run` with those arguments like `au run --env prod --open --hmr`. But `au run` now simply executes `npm start` command.
+In order to run the application, also install the [Aurelia CLI](https://aurelia.io/docs/cli)
 
-## Build for production
 
-Run `npm run build`, or the old way `au build --env prod`.
+~~~
+ npm install aurelia-cli -g
+~~~
 
-## Unit tests
 
-Run `au test` (or `au jest`).
+Before it will build successfully, you will need a [Mapbox API Key](https://www.mapbox.com/) 
+by registering for their service. The free tier will be fine.
 
-To run in watch mode, `au test --watch` or `au jest --watch`.
+Then create a file called `map-config.ts` in the project root structured like this:
+
+### map-config.ts
+~~~
+export const mapConfig = {
+  leafletKey : 'YOUR KEY HERE'
+};
+~~~
+
+Paste your key as shown.
+
+Then, to run the application, run the following from within the project folder:
+
+~~~
+au run --watch
+~~~
+
+The application should be served on:
+
+- <http://localhost:8080/>
