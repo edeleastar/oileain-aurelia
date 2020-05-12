@@ -1,54 +1,38 @@
-# Oileain Open Maps
+# Oileain
 
-An experiment in rendering maps of the Island of Ireland. Based on the book [Oileain](http://www.oileain.org/) by David Walsh. 
+An experiment in rendering maps of the Island of Ireland. The island details is derived from the book [Oileain](http://www.oileain.org/) by David Walsh. 
+
+The design of this application is presented here:
+
+- <https://oileain-labs.netlify.app>
+
+The above includes step-by-step tutorial including a rebuild of the application source from scratch.
+
 The application is running here:
 
 - <https://oileain.netlify.app>
 
-This application is implemented using the [Aurelia Framework](https://aurelia.io/). It relies the 
-the API hosted in this repository:
+It is implemented using the [Aurelia Framework](https://aurelia.io/). It relies the API hosted in this repository:
 
 - https://github.com/edeleastar/oileain-api
 
-This is an imutable json version of David's book. 
+This is an immutable json version of David's book. 
 
 # Building
 
-With git & node installed, clone this repo:
+With node, yarn and the [Aurelia CLI](https://aurelia.io/docs/cli) installed, clone this repo:
 
 ~~~
-git clone https://github.com/edeleastar/oileain-au.git
+git clone https://github.com/edeleastar/oileain.git
 ~~~
 
-From withint the project install dependencies:
+From within the project install dependencies:
 
 ~~~
-npm install
+yarn install
 ~~~
 
-In order to run the application, also install the [Aurelia CLI](https://aurelia.io/docs/cli)
-
-
-~~~
- npm install aurelia-cli -g
-~~~
-
-
-Before it will build successfully, you will need a [Mapbox API Key](https://www.mapbox.com/) 
-by registering for their service. The free tier will be fine.
-
-Then create a file called `map-config.ts` in the project root structured like this:
-
-### map-config.ts
-~~~
-export const mapConfig = {
-  leafletKey : 'YOUR KEY HERE'
-};
-~~~
-
-Paste your key as shown.
-
-Then, to run the application, run the following from within the project folder:
+To run the application, execute the following from within the project folder:
 
 ~~~
 au run --watch
