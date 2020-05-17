@@ -1,16 +1,16 @@
 # Oileain
 
-An experiment in rendering maps of the Island of Ireland. The island details is derived from the book [Oileain](http://www.oileain.org/) by David Walsh. 
+The application is running here:
+
+- <https://oileain.netlify.app>
+
+It is an experiment in rendering maps of the Island of Ireland. The island details is derived from the book [Oileain](http://www.oileain.org/) by David Walsh. 
 
 The design of this application is presented here:
 
 - <https://oileain-labs.netlify.app>
 
 The above includes step-by-step tutorial including a rebuild of the application source from scratch.
-
-The application is running here:
-
-- <https://oileain.netlify.app>
 
 It is implemented using the [Aurelia Framework](https://aurelia.io/). It relies the API hosted in this repository:
 
