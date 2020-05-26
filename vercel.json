@@ -1,5 +1,5 @@
 {
-  "rewrites": [
-    { "source": "/(.*)", "destination": "/index.html" },
-  ]
+  "name": "oileain",
+  "version": 1,
+  "rewrites": [{ "source": "/(.*)", "destination": "/index.html" }]
 }
